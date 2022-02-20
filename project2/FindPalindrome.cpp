@@ -232,10 +232,6 @@ bool FindPalindrome::add(const std::string & value)
 	vector<string> val(1);
 	val[0] = value;
 	
-	// Clear palindrome vector
-	dromes.clear();
-	numDromes = 0;
-	
 	// Return false if the word is invalid or not unique
 	if (validWords(val) == false || isUnique(strings, value) == false)
 		return false;
