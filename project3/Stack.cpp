@@ -10,7 +10,7 @@
 
 // TODO: Implement the constructor here
 template<class ItemType>
-Stack<ItemType>::Stack() 
+Stack<ItemType>::Stack()
 {
 	currentSize = 0;
 	headPtr = nullptr;
@@ -20,34 +20,29 @@ Stack<ItemType>::Stack()
 template<class ItemType>
 Stack<ItemType>::~Stack()
 {
-	clear();
+	for (int i = 0; i < currentSize; i++)
+		pop();
 }  // end destructor
 
-// Implement the isEmpty method here
+// TODO: Implement the isEmpty method here
 template<class ItemType>
 bool Stack<ItemType>::isEmpty() const
 {
 	return currentSize == 0;
 }  // end isEmpty
 
-// Implement the size method here
+// TODO: Implement the size method here
 template<class ItemType>
 int Stack<ItemType>::size() const
 {
 	return currentSize;
 }  // end size
 
-// Implement the push method here
+// TODO: Implement the push method here
 template<class ItemType>
 bool Stack<ItemType>::push(const ItemType& newItem)
 {
-	// Create new node and attatch it to top of stack
-	Node<ItemType> n(newItem, headPtr);
-
-	// Update headPtr
-	headPtr = &n;
-
-	// Increase current size by one
+	headPtr = new Node<ItemType>(newItem, headPtr);
 	currentSize++;
 	return true;
 }  // end push
@@ -56,20 +51,28 @@ bool Stack<ItemType>::push(const ItemType& newItem)
 template<class ItemType>
 ItemType Stack<ItemType>::peek() const throw(logic_error)
 {
-	ItemType returnItem = headPtr->getItem();
-	return returnItem;
+	if (currentSize != 0)
+	{
+		ItemType returnItem = headPtr->getItem();
+		return returnItem;
+	}
+	else
+		return (ItemType)NULL;
 }  // end peek
 
 // TODO: Implement the pop method here
 template<class ItemType>
 bool Stack<ItemType>::pop() 
 {
-	if(currentSize > 0)
+	if (currentSize > 0)
 	{
-		headPtr->getNext();
+		Node<ItemType> *removePtr = headPtr;
+		headPtr = headPtr->getNext();
+		delete removePtr;
+		removePtr = nullptr;
 		currentSize--;
 		return true;
-	}	
+	}
 	return false;
 }  // end pop
 
@@ -77,7 +80,6 @@ bool Stack<ItemType>::pop()
 template<class ItemType>
 void Stack<ItemType>::clear()
 {
-	currentSize = 0;
-	headPtr = nullPtr;
+	for (int i = 0; i < currentSize; i++)
+		pop();
 }  // end clear
-
