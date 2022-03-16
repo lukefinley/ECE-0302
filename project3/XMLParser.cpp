@@ -10,13 +10,18 @@
 // TODO: Implement the constructor here
 XMLParser::XMLParser()
 {
-	
+	elementNameBag = new Bag<string>;
+	parseStack = new Stack<string>;
 }  // end default constructor
 
 // TODO: Implement the destructor here
 XMLParser::~XMLParser()
 {
 	clear();
+	delete elementNameBag;
+	elementNameBag = nullptr;
+	delete parseStack;
+	parseStack = nullptr;
 }  // end destructor
 
 // TODO: Implement the tokenizeInputString method
@@ -185,7 +190,7 @@ bool XMLParser::parseTokenizedInput()
 		elementNameBag->add(name);	// Add name to bag
 			
 		// Loop through name string to error check
-		for (unsigned int j = 0; i < name.size(); j++)
+		for (unsigned int j = 0; j < name.size(); j++)
 		{
 			// If character is invalid, return false
 			if ((name[j] >= 33 && name[j] <= 44) || name[j] == 47 || (name[j] >= 59 && name[j] <= 64) || (name[j] >= 91 && name[j] <= 94) || name[j] == 96 || (name[j] >= 123 && name[j] <= 126))

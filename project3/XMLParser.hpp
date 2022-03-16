@@ -8,7 +8,7 @@
 
 #include <string>
 #include "Bag.hpp"
-#include "Stack.hpp"
+#include "Stack.cpp"
 
 /** enum definition for possible string token types. */
 typedef enum {START_TAG=1, END_TAG, EMPTY_TAG, CONTENT, DECLARATION} StringTokenType;
