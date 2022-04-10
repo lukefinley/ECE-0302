@@ -7,8 +7,8 @@ int x = -1, y = -1;
 void initial(Image<Pixel>& img);
 bool goal(Image<Pixel>& img);
 void breadth_first_search(Image<Pixel>& img);
-bool present(Deque<int> d, int x_val, int y_val);
-Deque<int> actions(Image<Pixel>& img, int x_val, int y_val);
+bool present(Deque<int> d);
+Deque<int> actions(Image<Pixel>& img);
 
 int main(int argc, char *argv[])
 {
@@ -28,9 +28,13 @@ int main(int argc, char *argv[])
 
   // Error Check
   if (x == -1 && y == -1)
+  {
+    std::cout << "Error";
     return EXIT_FAILURE;
+  }
 
   writeToFile(img, argv[2]);  // Write to output file
+  return EXIT_SUCCESS;
 }
 
 void breadth_first_search(Image<Pixel>& img)
@@ -40,9 +44,10 @@ void breadth_first_search(Image<Pixel>& img)
   if (goal(img) || (x == -1 && y == -1))
     return;
 
-  // Creat new deques for frontier and explored
+  // Create new deques for frontier and explored
   Deque<int> frontier;
   Deque<int> explored;
+  Deque<int> next;
 
   // Put the initial array in the frontier
   frontier.pushBack(x); 
@@ -68,10 +73,10 @@ void breadth_first_search(Image<Pixel>& img)
     explored.pushBack(x);
     explored.pushBack(y);
 
-    Deque<int> next = actions(img, x, y); // Create next deque from actions
+    next = actions(img); // Create next deque from actions
 
     // Loop through next actions
-    for (int i = 0; i < next.size(); i += 2)
+    while (!next.isEmpty())
     {
       // Get coordinates from next array
       x = next.front();
@@ -80,7 +85,7 @@ void breadth_first_search(Image<Pixel>& img)
       next.popFront();
 
       // If next coordinates are not in explored or frontier
-      if (present(explored, x, y) == false || present(frontier, x, y) == false)
+      if (present(explored) == false && present(frontier) == false)
       {
         // Return if the coordinates are a goal
         if (goal(img))
@@ -133,44 +138,45 @@ bool goal(Image<Pixel>& img)
 }
 
 // Function that returns possible moves
-Deque<int> actions(Image<Pixel>& img, int x_val, int y_val)
+Deque<int> actions(Image<Pixel>& img)
 {
   Deque<int> next;
 
-  if (img(x + 1, y) == WHITE)
-  {
-    next.pushBack(x + 1);
-    next.pushBack(y);
-  }
-  if (img(x - 1, y) == WHITE)
+  if (x > 0 && img(x - 1, y) == WHITE)
   {
     next.pushBack(x - 1);
     next.pushBack(y);
   }
-  if (img(x, y + 1) == WHITE)
+  if (x + 1 < img.width() && img(x + 1, y) == WHITE)
   {
-    next.pushBack(x);
-    next.pushBack(y + 1);
+    next.pushBack(x + 1);
+    next.pushBack(y);
   }
-  if (img(x, y - 1) == WHITE)
+  if (y > 0 && img(x, y - 1) == WHITE)
   {
     next.pushBack(x);
     next.pushBack(y - 1);
+  }
+  if (y + 1 < img.height() && img(x, y + 1) == WHITE)
+  {
+    next.pushBack(x);
+    next.pushBack(y + 1);
   }
 
   return next;
 }
 
 // Function that checks if the coordinates match
-bool present(Deque<int> d, int x_val, int y_val)
+bool present(Deque<int> dq)
 {
+  Deque<int> d = dq;
   // Loop through all values in deque
-  for (int i = 0; i < d.size(); i += 2)
+  while (!d.isEmpty())
   {
-    if (d.front() == x_val)
+    if (d.front() == x)
     {
       d.popFront();
-      if (d.front() == y_val)
+      if (d.front() == y)
         return true;
       d.popFront();
     }
@@ -180,5 +186,6 @@ bool present(Deque<int> d, int x_val, int y_val)
       d.popFront();
     }
   }
+
   return false;
 }
