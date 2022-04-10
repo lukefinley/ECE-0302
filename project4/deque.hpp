@@ -2,6 +2,7 @@
 #define DEQUE_HPP
 
 #include "abstract_deque.hpp"
+#include "linked_list.hpp"
 
 template <typename T>
 class Deque: public AbstractDeque<T>{
@@ -17,6 +18,7 @@ class Deque: public AbstractDeque<T>{
 		void pushBack(const T & item);
 		void popBack();
 		T back() const;
+		int size() const;
 		
 	private:
 		LinkedList<T> list;

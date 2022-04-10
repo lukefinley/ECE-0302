@@ -13,15 +13,19 @@ TEST_CASE( "Tests", "[deque]" )
     dq.pushBack(2);
     dq.pushBack(3);
     dq.pushBack(4);
-    REQUIRE(dq.front() = 1);
-    REQUIRE(dq.back() = 4);
+    REQUIRE(dq.front() == 1);
+    REQUIRE(dq.back() == 4);
     REQUIRE(!dq.isEmpty());
     dq.popBack();
-    REQUIRE(dq.back() = 3);
+    REQUIRE(dq.back() == 3);
     dq.popFront();
-    REQUIRE(dq.front() = 2);
+    REQUIRE(dq.front() == 2);
 
     Deque<int> dqx = dq;
-    REQUIRE(dqx.front() = 2);
-    REQUIRE(dqx.back() = 3);
+    REQUIRE(dqx.front() == 2);
+    REQUIRE(dqx.back() == 3);
+
+    Deque<int> dqy(dq);
+    REQUIRE(dqy.front() == 2);
+    REQUIRE(dqy.back() == 3);
 }

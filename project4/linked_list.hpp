@@ -46,9 +46,9 @@ public:
   void setEntry(std::size_t position, const T& newValue);
 
 private:
-
-  //TODO
-  
+  std::size_t itemCount;
+  Node<T> *getNodeAt(int position) const;
+  Node<T> *headPtr;
 };
 
 #include "linked_list.tpp"

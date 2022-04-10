@@ -50,7 +50,7 @@ T Deque<T>::front() const
 template <typename T>
 void Deque<T>::pushBack(const T & item)
 {
-	list.insert(list.getLength(); item);
+	list.insert(list.getLength(), item);
 }
 
 template <typename T>
@@ -62,5 +62,11 @@ void Deque<T>::popBack()
 template <typename T>
 T Deque<T>::back() const
 {
-	return getEntry(list.getLength() - 1);
+	return list.getEntry(list.getLength() - 1);
+}
+
+template <typename T>
+int Deque<T>::size() const
+{
+	return list.getLength();
 }
