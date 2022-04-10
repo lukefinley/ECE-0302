@@ -43,18 +43,12 @@ linked_list.hpp
 /home/luke/github-test/ECE-0302/project4/linked_list.hpp
 
 /home/luke/github-test/ECE-0302/project4/pathfinder.cpp
-image.h
-/home/luke/github-test/ECE-0302/project4/image.h
-deque.hpp
-/home/luke/github-test/ECE-0302/project4/deque.hpp
-image.h
-/home/luke/github-test/ECE-0302/project4/image.h
-deque.hpp
-/home/luke/github-test/ECE-0302/project4/deque.hpp
-vector
--
 iostream
 -
+image.h
+/home/luke/github-test/ECE-0302/project4/image.h
+deque.hpp
+/home/luke/github-test/ECE-0302/project4/deque.hpp
 
 lib/image.h
 algorithm

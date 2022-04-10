@@ -64,9 +64,3 @@ T Deque<T>::back() const
 {
 	return list.getEntry(list.getLength() - 1);
 }
-
-template <typename T>
-int Deque<T>::size() const
-{
-	return list.getLength();
-}

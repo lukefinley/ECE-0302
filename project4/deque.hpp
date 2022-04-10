@@ -18,7 +18,6 @@ class Deque: public AbstractDeque<T>{
 		void pushBack(const T & item);
 		void popBack();
 		T back() const;
-		int size() const;
 		
 	private:
 		LinkedList<T> list;

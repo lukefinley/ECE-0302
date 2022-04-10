@@ -48,6 +48,7 @@ void breadth_first_search(Image<Pixel>& img)
   Deque<int> frontier;
   Deque<int> explored;
   Deque<int> next;
+  Deque<int> d;
 
   // Put the initial array in the frontier
   frontier.pushBack(x); 
@@ -167,9 +168,8 @@ Deque<int> actions(Image<Pixel>& img)
 }
 
 // Function that checks if the coordinates match
-bool present(Deque<int> dq)
+bool present(Deque<int> d)
 {
-  Deque<int> d = dq;
   // Loop through all values in deque
   while (!d.isEmpty())
   {
